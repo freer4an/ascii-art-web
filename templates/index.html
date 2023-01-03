@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css"/>
+    <link rel="icon" href="data:;base64,=">
+    <title>Ascii-Art-Web</title>
+</head>
+<body>
+    <header>
+        <div class="projectTitle">
+           <h1>Ascii-art-converter</h1>
+        </div>
+    </header>
+    <section>
+            <form class="ascii_form" action="ascii-art" method="post">
+                <div class="textholder">
+                    <label for="text">Your text:</label><br>
+                    <textarea name="text" id="text" cols="60" rows="10" maxlength="100">{{.Text}}</textarea>
+                </div>
+                <br>
+                <div class="banners">
+                    <input class="banner" type="radio" id="standard" name="banner" value="standard" checked>
+                    <label class="banner" for="shadow">Standard</label><br>
+                    <input class="banner" type="radio" id="shadow" name="banner" value="shadow">
+                    <label class="banner" for="standard">Shadow</label><br>
+                    <input class="banner" type="radio" id="thinkertoy" name="banner" value="thinkertoy">
+                    <label class="banner" for="thinkertoy">Thinkertoy</label><br>
+                </div>
+                <br>
+                <input class="submit_btn" type="submit" value="Convert">
+            </form> 
+        <div class="result">
+            <pre>{{if .Result}}{{.Result}} 
+                {{else}}Here is result{{end}} 
+            </pre>
+        </div>
+    </section>
+    <footer>
+    </footer>
+</body>
+</html>
