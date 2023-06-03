@@ -10,10 +10,10 @@ type Ascii_art struct {
 	width  int
 }
 
-func GetSamples(path string) (map[rune]Ascii_art, string) {
+func GetSamples(path string) map[rune]Ascii_art {
 	f, err := os.Open(path)
 	if err != nil {
-		return nil, ""
+		return nil
 	}
 	defer f.Close()
 	test := []string{}
@@ -21,12 +21,10 @@ func GetSamples(path string) (map[rune]Ascii_art, string) {
 	for scanner.Scan() {
 		test = append(test, scanner.Text())
 	}
-	symbols := ""
 	start := 1
 	samples := map[rune]Ascii_art{}
 	key := ' '
 	for key <= '~' {
-		symbols += string(key)
 		letter := ""
 		width := 0
 		for i := start; i < start+8; i++ {
@@ -39,5 +37,5 @@ func GetSamples(path string) (map[rune]Ascii_art, string) {
 		start += 9
 		key++
 	}
-	return samples, symbols
+	return samples
 }

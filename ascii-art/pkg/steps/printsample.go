@@ -2,9 +2,13 @@ package steps
 
 import (
 	"strings"
+	"unicode"
 )
 
-func PrintSamples(text string, contents string, sample map[rune]Ascii_art) string {
+func PrintSamples(text string, sample map[rune]Ascii_art) (string, int) {
+	if !isASCII(text) {
+		return "", 0
+	}
 	words := strings.Split(text, "\n")
 	if strings.HasPrefix(text, "\n") {
 		words = words[1:]
@@ -13,7 +17,7 @@ func PrintSamples(text string, contents string, sample map[rune]Ascii_art) strin
 	str := ""
 
 	for _, word := range words {
-		if !strings.ContainsAny(word, contents) {
+		if word == "" {
 			str += "\n"
 			continue
 		}
@@ -34,5 +38,14 @@ func PrintSamples(text string, contents string, sample map[rune]Ascii_art) strin
 			str += "\n"
 		}
 	}
-	return str
+	return str[:len(str)-1], 1
+}
+
+func isASCII(s string) bool {
+	for i := 0; i < len(s); i++ {
+		if s[i] > unicode.MaxASCII {
+			return false
+		}
+	}
+	return true
 }

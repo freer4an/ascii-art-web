@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/style.css"/>
+    <link rel="stylesheet" href="/static/style.css"/>
     <link rel="icon" href="data:;base64,=">
     <title>Ascii-Art-Web</title>
 </head>
@@ -15,30 +15,33 @@
         </div>
     </header>
     <section>
-            <form class="ascii_form" action="ascii-art" method="post">
-                <div class="textholder">
-                    <label for="text">Your text:</label><br>
-                    <textarea name="text" id="text" cols="60" rows="10" maxlength="100">{{.Text}}</textarea>
-                </div>
-                <br>
-                <div class="banners">
-                    <input class="banner" type="radio" id="standard" name="banner" value="standard" checked>
-                    <label class="banner" for="shadow">Standard</label><br>
-                    <input class="banner" type="radio" id="shadow" name="banner" value="shadow">
-                    <label class="banner" for="standard">Shadow</label><br>
-                    <input class="banner" type="radio" id="thinkertoy" name="banner" value="thinkertoy">
-                    <label class="banner" for="thinkertoy">Thinkertoy</label><br>
-                </div>
-                <br>
-                <input class="submit_btn" type="submit" value="Convert">
-            </form> 
+        <form class="ascii_form" action="ascii-art" method="post">
+            <div class="textholder">
+                <label for="text">Your text:</label><br>
+                <textarea name="text" id="textbox" cols="60" rows="10" maxlength="100">{{.Text}}</textarea>
+            </div>
+            <br>
+            <div class="banners">
+                <select name="banners" id="cars">
+                    <option value="standard" {{ if eq .Banner "standard" }}selected="selected"{{ end }}>standard</option>
+                    <option value="shadow" {{if eq .Banner "shadow" }}selected="selected"{{ end }}>shadow</option>
+                    <option value="thinkertoy" {{if eq .Banner "thinkertoy" }}selected="selected"{{ end }}>thinkertoy</option>
+                </select>
+            </div>
+            <br> 
+            <input class="submit_btn" type="submit" value="Convert">
+        </form>
+        <div class="save_buttons">
+            {{if .Result}}
+            <form action="/download" method="post">
+                <button type="button" onclick="copyAscii()">Copy</button>
+                <button type="submit">Download</button>
+            </form>{{end}}
+        </div>
         <div class="result">
-            <pre>{{if .Result}}{{.Result}} 
-                {{else}}Here is result{{end}} 
-            </pre>
+            <pre id="result" name="result">{{if .Result}}{{.Result}}{{else}}Here is result{{end}}</pre>
         </div>
     </section>
-    <footer>
-    </footer>
+    <script type="text/javascript" src="/static/script.js"></script>
 </body>
 </html>

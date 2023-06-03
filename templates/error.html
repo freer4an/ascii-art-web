@@ -1,1 +1,20 @@
-<h1>{{ .ErrMsg }}</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ .ErrStatus }}</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <link rel="icon" href="data:;base64,=">
+</head>
+<body>
+    <div class="error_msg">
+        <h1>{{ .ErrMsg }}</h1>
+    </div>
+    <div class="img_sign">
+        <img src="/static/sign.png" alt="" style="width: 100%;">
+        <div class="centered"><h1>{{ .ErrStatus }}</h1></div>
+    </div>
+</body>
+</html>
